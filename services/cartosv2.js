@@ -60,7 +60,7 @@ async function createCustomer(customerData) {
       customerData,
       { headers: commonHeaders, httpsAgent: agent }
     );
-    console.log('Resposta da Criação do Cliente:', response.data);
+    //console.log('Resposta da Criação do Cliente:', response.data);
     return response.data.customer.id;
   } catch (error) {
     console.error('Erro ao criar cliente:', error.response?.data || error.message);
@@ -125,8 +125,8 @@ async function simulateFGTSLotus(cpf) {
     let attempts = 0;
     let simulationData;
 
-    while (attempts < 20) {
-      await delay(3000);
+    while (attempts < 11) {
+      await delay(5000);
       attempts++;
 
       const simRes = await axios.get(
@@ -148,10 +148,10 @@ async function simulateFGTSLotus(cpf) {
           }
         };
       }
-
+  
       if (simulationData.status === 'COMPLETED') {
         const saldo = simulationData.simulation?.totalTransfer || 0;
-        const customer = simulationData.customer || {};
+        const customer = simulationData.customer;
 
         if (customer) {
           const customerId = await createCustomer({
@@ -206,7 +206,7 @@ async function simulateFGTSLotus(cpf) {
       }
     }
 
-    // Após 20 tentativas sem sucesso
+    // Após 14 tentativas sem sucesso
     return {
       proposta: {
         cpf,
