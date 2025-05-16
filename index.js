@@ -8,7 +8,7 @@ const { initializeVenom } = require('./cli/venomHandler'); // Importe o venomHan
 const app = express();
 const port = 3333;
 
-const nomeArquivo = `LOTUS-${new Date().toISOString().split('T')[0]}.xlsx`;
+const nomeArquivo = `LOTUS-WHATSAPP-${new Date().toISOString().split('T')[0]}.xlsx`;
 const caminhoOutput = path.resolve(__dirname, nomeArquivo);
 
 app.use(express.json());
